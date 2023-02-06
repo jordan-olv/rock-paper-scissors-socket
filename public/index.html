@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <section class="start__content">
+        <div class="start__content--logo">
+            <img src="assets/logo.png" alt="">
+        </div>
+        <div class="start__content--btnStart">
+            <button class="btn secondary" id="playGame">PLAY</button>
+        </div>
+    </section>
+    <section class="menu__content hidden">
+        <div class="menu__content--bloc">
+            <div class="menu__content--bloc-top">
+                <div class="menu__content--bloc-top-left active" data-mode="join">JOIN</div>
+                <div class="menu__content--bloc-top-right" data-mode="create">CREATE</div>
+            </div>
+            <div class="menu__content--bloc-container">
+                <ul class="join__content">
+
+                </ul>
+                <div class="create__content hidden">
+                    <div class="create__content--form">
+                        <label for="room_name">Nom de la room
+                            <input type="text" name="room_name">
+                        </label>
+                        <div class="create__content--form-radio">
+                            <div class="bestof-radio">
+                                <input type="radio" name="bo" value="BO3">
+                                <label for="bo">BO3</label>
+                            </div>
+                            <div class="bestof-radio">
+                                <input type="radio" name="bo" value="BO5">
+                                <label for="bo">BO5</label>
+                            </div>
+                            <div class="bestof-radio">
+                                <input type="radio" name="bo" value="BO7">
+                                <label for="bo">BO7</label>
+                            </div>
+                        </div>
+                        <button class="btn primary" id="createRoom">CREATE ROOM</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="game__content hidden">
+        <div class="game__content--top">
+            <div class="game__content--top-player">
+                <div class="top-player-one">
+                    <img class="player_img" src="" alt="">
+                    <p class="player_name">PLAYER 1</p>
+                    <p class="player_score">0</p>
+                </div>
+                <div class="top-player-score">
+                    <p class="player_vs">VS</p>
+                    <p class="player_mode">BO5</p>
+                </div>
+                <div class="top-player-two">
+                    <img class="player_img" src="" alt="">
+                    <p class="player_name">PLAYER 2</p>
+                    <p class="player_score">0</p>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="game__content--mid">
+            <h2>En attente d'un adversaire...</h2>
+            <div class="game__content--mid-play hidden">
+                <img src="assets/choice/1.png" class="choicePlay" data-choice="paper" alt="Paper">
+                <img src="assets/choice/2.png" class="choicePlay" data-choice="scissor" alt="Scissor">
+                <img src="assets/choice/3.png" class="choicePlay" data-choice="rock" alt="Rock">
+            </div>
+            <div class="game__content__choice"></div>
+        </div>
+    </section>
+    <script src="/reload/reload.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/index.js "></script>
+</body>
+
+</html>

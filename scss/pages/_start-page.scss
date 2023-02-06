@@ -1,0 +1,25 @@
+.start__content {
+  margin-top: -1.5rem;
+  height: 100vh;
+  @include flex-center;
+  flex-direction: column;
+
+  &--logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 60%;
+    }
+  }
+
+  &--btnStart {
+    width: 100%;
+    @include flex-center;
+
+    button {
+      width: 50%;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.btn {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: white;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.secondary {
+  background: #5E4C5A;
+
+  &:hover {
+    border: 1px solid #5E4C5A;
+    color: #5E4C5A;
+  }
+}
+
+.primary {
+  background: #55917F;
+
+  &:hover {
+    border: 1px solid #55917F;
+    color: #55917F;
+  }
+}

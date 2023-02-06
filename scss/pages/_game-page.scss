@@ -1,0 +1,121 @@
+.game__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  &--top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 30%;
+    margin-top: 17%;
+
+    &-player {
+      width: 85%;
+      display: flex;
+      justify-content: space-around;
+
+      .player_name {
+        color: $secondary;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      .player_score {
+        display: inline-block;
+        justify-content: flex-start;
+        color: $primary;
+        font-weight: 900;
+        font-size: 55px;
+        line-height: 48px;
+      }
+
+      .top-player-score {
+
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 25px;
+
+        .player_vs {
+          font-style: italic;
+          font-weight: 900;
+          font-size: 2.5rem;
+          line-height: 1.75rem;
+          color: $primary;
+        }
+
+        .player_mode {
+          font-weight: 700;
+          font-size: 1.25rem;
+          line-height: 1.875rem;
+          color: $secondary;
+        }
+      }
+
+      img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+      }
+
+
+
+    }
+
+  }
+
+  &--mid {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+    padding-top: 20%;
+
+    .game__content__choice {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin-top: 5px;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    &-play {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin-top: 5px;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    h2 {
+      font-weight: 700;
+      line-height: 48px;
+      color: $secondary;
+    }
+  }
+}
+
+.top-player-one {
+  @include flex-center;
+  flex-direction: column;
+  visibility: hidden;
+}
+
+.top-player-two {
+  @include flex-center;
+  flex-direction: column;
+  visibility: hidden;
+}

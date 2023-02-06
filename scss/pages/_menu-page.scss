@@ -1,0 +1,168 @@
+.menu__content--bloc {
+  width: 80%;
+
+  &-top {
+    display: flex;
+
+    &-left {
+      background: $primary;
+      border-top-left-radius: 10px;
+
+      &.active {
+        box-shadow: inset 0px 4px 25px 3px #3B6659;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+
+    &-right {
+      background: $secondary;
+      border-top-right-radius: 10px;
+
+      &.active {
+        box-shadow: inset 0px 4px 25px 3px #462F41;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+
+    &-left,
+    &-right {
+      color: $white;
+      width: 50%;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 20px;
+      @include flex-center;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  &-container {
+    background: #F9F9F9;
+    border-radius: 0 0 10px 10px;
+
+    ul {
+      text-align: center;
+
+      li {
+        color: #333333;
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        align-items: center;
+
+        &:not(:last-child) {
+
+          border-bottom: 1px solid #3333331c;
+        }
+
+        p:nth-child(2) {
+          font-size: .75em;
+          padding: 3px;
+          border-radius: 5px;
+          color: white;
+        }
+
+        p:last-child {
+          margin-left: auto;
+          margin-right: 10px;
+        }
+
+        &::before {
+          font-family: FontAwesome;
+          content: '\f015';
+          margin-left: 5px;
+        }
+
+        &:nth-child(even) {
+          background: #E8E8E8;
+
+          p:nth-child(2) {
+            background: $secondary;
+          }
+
+          &::before {
+            color: $primary;
+          }
+        }
+
+        &:nth-child(odd) {
+
+          p:nth-child(2) {
+            background: $primary;
+          }
+
+          &::before {
+            color: $secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.create__content {
+  padding: 2.5rem;
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    button {
+      font-size: 1em;
+    }
+
+    &>label {
+      color: #333333;
+
+      &>input {
+        border: none;
+        outline: none;
+        padding: .90rem;
+        background: #F2F9E5;
+        box-shadow: inset 0px -1px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        width: 100%;
+      }
+    }
+
+    &-radio {
+      display: flex;
+      justify-content: space-between;
+
+
+
+      .bestof-radio {
+
+        width: 25%;
+        position: relative;
+        @include flex-center;
+        font-weight: 500;
+        color: white;
+
+        label {
+          background: $secondary;
+          width: 100%;
+          padding: 1rem;
+          border-radius: 8px;
+          border: 2px solid transparent;
+          display: flex;
+          justify-content: center;
+        }
+
+        input {
+          opacity: 0;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          &:checked+label {
+            background: transparent;
+            color: $secondary;
+            border: 2px solid $secondary;
+          }
+        }
+      }
+    }
+  }
+}
