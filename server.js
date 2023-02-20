@@ -34,22 +34,30 @@ io.on("connection", (socket) => {
             mode: mode,
             avatar: ['', '']
         }
-
         rooms[roomID] = newRooms;
+        socket.join(roomID);
 
         for (let i = 0; i < rooms[roomID].avatar.length; i++) {
-            rdm = Math.floor(Math.random() * 5) + 1;
+            const rdm = Math.floor(Math.random() * 5) + 1;
+            console.log(rdm);
             rooms[roomID].avatar[i] = rdm;
         }
 
-        socket.join(roomID);
         joinRoom(roomID);
+
 
         io.emit('roomRefresh', rooms);
     });
 
     socket.on('joinRoom', (roomID) => {
+        console.log("Join Room");
         joinRoom(roomID);
+    });
+
+    socket.on('replay', (room) => {
+        rooms[room.id].score = [0, 0];
+        rooms[room.id].move = ['', ''];
+        emitToRoom(room.id, 'replayClient');
     });
 
     socket.on('choice', (value, room) => {
@@ -59,12 +67,13 @@ io.on("connection", (socket) => {
             const winner = compareMove(rooms[room.id].move[0], rooms[room.id].move[1]);
             if (winner == 'player1') {
                 rooms[room.id].score[0] += 1;
-            } else {
+            } else if (winner == 'player2') {
                 rooms[room.id].score[1] += 1;
             }
-
             emitToRoom(room.id, 'result', winner);
             rooms[room.id].move = ['', ''];
+
+            console.log('avatar', rooms[room.id]);
         }
     });
 
@@ -77,6 +86,7 @@ io.on("connection", (socket) => {
             io.emit('roomRefresh', rooms);
             socket.join(roomID);
             socket.emit('userJoin', rooms[roomID]);
+
 
             if (rooms[roomID]["players"].length === 2) {
                 emitToRoom(roomID, 'startGame');

@@ -43,6 +43,12 @@ body {
   color: #55917F;
 }
 
+.replay {
+  padding: 5px 10px;
+  margin-bottom: 100px;
+  margin-top: auto;
+}
+
 .start__content {
   margin-top: -1.5rem;
   height: 100vh;

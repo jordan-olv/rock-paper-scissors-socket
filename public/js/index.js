@@ -36,6 +36,7 @@ const btnPlay = document.querySelector('#playGame');
 const playSection = document.querySelector('.start__content');
 const menuSection = document.querySelector('.menu__content');
 
+
 const playGame = () => {
     playSection.classList.toggle('hidden');
     menuSection.classList.toggle('hidden');
@@ -44,6 +45,7 @@ btnPlay.addEventListener("click", playGame);
 
 const btnMode = document.querySelector('.menu__content--bloc-top');
 const btnJoinOrCreate = [...btnMode.children];
+console.log(btnJoinOrCreate)
 btnJoinOrCreate.forEach((btn) => {
     btn.addEventListener("click", () => {
         if (btn.dataset.mode === 'join') {
@@ -70,6 +72,7 @@ const showContentMenu = (state) => {
 }
 
 const createRoomBtn = document.querySelector('#createRoom');
+
 createRoomBtn.addEventListener("click", () => {
     const inputCreate = document.querySelector('input[name="room_name"]');
     const inputMode = document.querySelector('input[name="bo"]:checked');
@@ -79,13 +82,15 @@ createRoomBtn.addEventListener("click", () => {
 socket.on('roomRefresh', (rooms) => {
     const roomList = document.querySelector('ul.join__content');
     roomList.innerHTML = '';
-
+    console.log(rooms)
     Object.keys(rooms, 'before No Room')
     if (Object.keys(rooms).length < 1) {
         roomList.innerHTML = '<li><p style="text-align: center; width: 100%; margin: 0;">Aucune Room</></li>';
     }
 
+    console.log('rooms', rooms)
     for (const room in rooms) {
+        console.log('dld', room)
         const li = document.createElement('li');
         const pName = document.createElement('p');
         const pMode = document.createElement('p');
@@ -98,6 +103,7 @@ socket.on('roomRefresh', (rooms) => {
         li.addEventListener('click', () => {
             socket.emit('joinRoom', room);
         });
+
 
         li.appendChild(pName);
         li.appendChild(pMode);
@@ -134,16 +140,24 @@ socket.on('startGame', (room) => {
     playerImg[1].src = 'assets/avatar/' + room.avatar[1] + '.png';
 })
 
+socket.on('replayClient', (room) => {
+    resetGame(room);
+});
+
 socket.on('waitGame', (room) => {
     gameContent.classList.remove('hidden');
     menuContent.classList.add('hidden');
     textWait.textContent = 'En attente d\'un adversaire...';
     textMode.textContent = room.mode;
     choiceContent.classList.add('hidden');
+    console.log(room.avatar)
     playerScore[0].textContent = room.score[0];
     playerScore[1].textContent = room.score[1];
     topPlayerOne.style.visibility = 'visible';
+    console.log('pl', playerImg[0])
+    console.log('PLL', room)
     playerImg[0].src = 'assets/avatar/' + room.avatar[0] + '.png';
+    console.log('assets/avatar' + room.avatar[0] + '.png')
 })
 
 const moveImg = {
@@ -174,7 +188,15 @@ socket.on('result', (room, winner) => {
             document.querySelector('.top-player-one').style.filter = 'grayscale(1)';
             newH2.textContent = 'Player2 Win';
         }
-
+        const newButton = document.createElement('button');
+        newButton.textContent = 'Rejouer';
+        newButton.classList.add('btn');
+        newButton.classList.add('primary');
+        newButton.classList.add('replay');
+        newButton.addEventListener('click', () => {
+            socket.emit('replay', room);
+        });
+        document.querySelector('.game__content--mid').appendChild(newButton);
         document.querySelector('.game__content--mid').insertBefore(newH2, document.querySelector('.game__content--mid').children[1]);
 
     } else {
@@ -189,6 +211,18 @@ socket.on('result', (room, winner) => {
     }
 
 });
+
+const resetGame = (room) => {
+    document.querySelector('.top-player-one').style.filter = 'grayscale(0)';
+    document.querySelector('.top-player-two').style.filter = 'grayscale(0)';
+    document.querySelector('.game__content--mid').removeChild(document.querySelector('.game__content--mid').children[1]);
+    choiceContentTurn.innerHTML = '';
+    playerScore[0].textContent = room.score[0];
+    playerScore[1].textContent = room.score[1];
+    choiceContent.classList.remove('hidden');
+    textWait.textContent = 'Faites votre choix !';
+    document.querySelector('.btn.primary.replay').remove();
+}
 
 const newTurn = () => {
     setTimeout(() => {
